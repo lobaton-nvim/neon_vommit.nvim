@@ -1,50 +1,37 @@
--- ==================================================================
--- Neon Vommit - A vibrant, retro-neon colorscheme for Neovim
--- Ported from: https://github.com/ghgofort/vscode-neon-vommit-theme
--- ==================================================================
-
-local neon_vommit = {}
-
--- ==================================================================
--- 🎨 Paleta de colores extraída del JSON de VS Code
--- ==================================================================
-neon_vommit = {
-	bg = "#222222", -- Fondo principal
-	fg = "#f0f0f0", -- Texto principal
-	comment = "#BBAA99", -- Comentarios
-	string = "#CBC3FF", -- Cadenas generales
-	string_html = "#66D9EF", -- Cadenas en HTML/XML
-	number = "#33CC99", -- Números
-	constant = "#4499FF", -- Constantes (true, null, etc.)
-	keyword = "#FF00AA", -- Keywords, control, tags
-	func = "#76EE00", -- Funciones, clases, atributos
-	variable = "#66D9EF", -- Variables
-	type = "#CC33FF", -- Tipos en TypeScript
-	operator = "#FFFF00", -- Operadores (==, =>, etc.)
-	warning = "#EEEE22", -- Cambios, advertencias
-	error = "#f44747", -- Errores
-	info = "#6796e6", -- Información
-	debug = "#b267e6", -- Debug
-	added = "#76EE00", -- Insertado (Git)
-	deleted = "#FF00AA", -- Eliminado (Git)
-	yellow = "#FD971F", -- Parámetros, SCSS, CSS
-	purple = "#BB77FF", -- Propiedades JS, listas Markdown
+-- lua/colorscheme/neon_vommit.lua
+local neon_vommit = {
+	bg = "#222222",
+	fg = "#f0f0f0",
+	comment = "#BBAA99",
+	string = "#CBC3FF",
+	string_html = "#66D9EF",
+	number = "#33CC99",
+	constant = "#4499FF",
+	keyword = "#FF00AA",
+	func = "#76EE00",
+	variable = "#66D9EF",
+	type = "#CC33FF",
+	operator = "#FFFF00",
+	warning = "#EEEE22",
+	error = "#f44747",
+	info = "#6796e6",
+	debug = "#b267e6",
+	added = "#76EE00",
+	deleted = "#FF00AA",
+	yellow = "#FD971F",
+	purple = "#BB77FF",
 }
 
--- ==================================================================
--- 🛠 Función auxiliar para definir highlights
--- ==================================================================
 local function hl(group, style)
 	vim.api.nvim_set_hl(0, group, style)
 end
 
--- Limpiar colores previos
+-- Limpiar antes de definir
 vim.cmd("hi clear")
 if vim.fn.exists("syntax_on") then
 	vim.cmd("syntax reset")
 end
 
--- Configuración básica
 vim.o.termguicolors = true
 vim.g.colors_name = "neon_vommit"
 
@@ -52,7 +39,6 @@ vim.g.colors_name = "neon_vommit"
 -- 🖌️ Definición de highlights
 -- ==================================================================
 
--- Grupo principal
 hl("Normal", { fg = neon_vommit.fg, bg = neon_vommit.bg })
 hl("NormalNC", { bg = neon_vommit.bg })
 hl("NormalFloat", { bg = neon_vommit.bg, fg = neon_vommit.fg })
@@ -98,24 +84,18 @@ hl("WarningMsg", { fg = neon_vommit.warning })
 
 hl("Title", { fg = neon_vommit.func, bold = true })
 
--- Diff
-hl("DiffAdd", { bg = "#003300", fg = neon_vommit.added })
-hl("DiffDelete", { bg = "#330000", fg = neon_vommit.deleted })
-hl("DiffChange", { bg = "#333300", fg = neon_vommit.warning })
-hl("DiffText", { bg = "#444400", fg = neon_vommit.fg, bold = true })
-
--- Cursor y selección
+-- Cursor
 hl("Cursor", { fg = neon_vommit.bg, bg = neon_vommit.fg })
-hl("CursorLine", { bg = "#3c3c3c" }) -- Eliminado alpha
-hl("CursorColumn", { bg = "#3c3c3c" }) -- Eliminado alpha
+hl("CursorLine", { bg = "#3c3c3c" })
+hl("CursorColumn", { bg = "#3c3c3c" })
 hl("ColorColumn", { bg = "#333333" })
 
 hl("Visual", { bg = "#646464" })
 hl("VisualNOS", { bg = "#555555" })
 
--- Líneas y números
+-- Líneas
 hl("LineNr", { fg = "#3a3a3a", bg = neon_vommit.bg })
-hl("CursorLineNr", { fg = neon_vommit.func, bg = "#3c3c3c", bold = true }) -- sin alpha
+hl("CursorLineNr", { fg = neon_vommit.func, bg = "#3c3c3c", bold = true })
 hl("SignColumn", { bg = neon_vommit.bg })
 hl("Folded", { fg = neon_vommit.comment, bg = neon_vommit.bg })
 hl("FoldColumn", { fg = neon_vommit.comment, bg = neon_vommit.bg })
@@ -125,14 +105,13 @@ hl("StatusLine", { fg = neon_vommit.fg, bg = "#333333", bold = true })
 hl("StatusLineNC", { fg = neon_vommit.comment, bg = "#333333" })
 hl("WinBar", { fg = neon_vommit.fg, bg = neon_vommit.bg })
 hl("WinBarNC", { fg = neon_vommit.comment, bg = neon_vommit.bg })
-
 hl("VertSplit", { fg = "#3a3a3a", bg = "#3a3a3a" })
 
 -- Búsqueda
 hl("Search", { bg = neon_vommit.warning, fg = neon_vommit.bg })
 hl("IncSearch", { bg = neon_vommit.operator, fg = neon_vommit.bg })
 
--- Diagnósticos (LSP)
+-- Diagnósticos
 hl("DiagnosticError", { fg = neon_vommit.error })
 hl("DiagnosticWarn", { fg = neon_vommit.warning })
 hl("DiagnosticInfo", { fg = neon_vommit.info })
@@ -211,7 +190,7 @@ hl("Ignore", { fg = neon_vommit.comment })
 hl("NonText", { fg = "#4a4a4a" })
 hl("EndOfBuffer", { fg = "#333333" })
 
--- Treesitter (nvim-treesitter)
+-- Treesitter
 hl("TSComment", { fg = neon_vommit.comment, italic = true })
 hl("TSConstant", { fg = neon_vommit.constant })
 hl("TSString", { fg = neon_vommit.string })
@@ -232,8 +211,3 @@ hl("TSField", { fg = neon_vommit.purple })
 hl("TSProperty", { fg = neon_vommit.purple })
 hl("TSTag", { fg = neon_vommit.keyword })
 hl("TSTagDelimiter", { fg = neon_vommit.keyword })
-
--- ==================================================================
--- ✅ Listo para usar
--- ==================================================================
--- Carga con: vim.cmd("colorscheme neon_vommit")

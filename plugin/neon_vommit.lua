@@ -1,6 +1,7 @@
 -- plugin/neon_vommit.lua
--- Entry point: permite que `:colorscheme neon_vommit` funcione
+-- Entry point: registra el tema para que aparezca en `:colorscheme`
 
+-- Función para cargar el tema
 local function load()
 	-- Limpiar tema anterior
 	vim.cmd("hi clear")
@@ -8,14 +9,21 @@ local function load()
 		vim.cmd("syntax reset")
 	end
 
-	-- Cargar el tema
+	-- Cargar definición
 	require("neon_vommit")
 
-	-- Establecer nombre
+	-- Marcar como actual
 	vim.g.colors_name = "neon_vommit"
 end
 
--- Cargar automáticamente si el usuario lo configuró
+-- 🟩 Registramos el nombre para que aparezca en `:colorscheme`
+-- Esto activa el autocompletado
+if not vim.g.loaded_colorschemes then
+	vim.g.loaded_colorschemes = {}
+end
+vim.g.loaded_colorschemes["neon_vommit"] = true
+
+-- Cargar si ya se pidió
 if vim.g.colors_name == "neon_vommit" then
 	load()
 end
@@ -30,7 +38,7 @@ vim.api.nvim_create_autocmd("OptionSet", {
 	end,
 })
 
--- Permitir `:colorscheme neon_vommit`
+-- Permitir `:colorscheme neon_vommit` (para compatibilidad)
 vim.api.nvim_create_user_command("Colorscheme", function(opts)
 	if opts.args == "neon_vommit" then
 		vim.g.colors_name = "neon_vommit"

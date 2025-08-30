@@ -1,4 +1,6 @@
--- lua/colorscheme/neon_vommit.lua
+-- lua/neon_vommit.lua
+-- Neon Vommit - Retro-neon colorscheme for Neovim
+
 local neon_vommit = {
 	bg = "#222222",
 	fg = "#f0f0f0",
@@ -33,12 +35,8 @@ if vim.fn.exists("syntax_on") then
 end
 
 vim.o.termguicolors = true
-vim.g.colors_name = "neon_vommit"
 
--- ==================================================================
--- 🖌️ Definición de highlights
--- ==================================================================
-
+-- Aplicar el tema
 hl("Normal", { fg = neon_vommit.fg, bg = neon_vommit.bg })
 hl("NormalNC", { bg = neon_vommit.bg })
 hl("NormalFloat", { bg = neon_vommit.bg, fg = neon_vommit.fg })
@@ -211,3 +209,6 @@ hl("TSField", { fg = neon_vommit.purple })
 hl("TSProperty", { fg = neon_vommit.purple })
 hl("TSTag", { fg = neon_vommit.keyword })
 hl("TSTagDelimiter", { fg = neon_vommit.keyword })
+
+-- Marcar como cargado
+_G.neon_vommit_loaded = true

@@ -106,8 +106,8 @@ hl("DiffText", { bg = "#444400", fg = neon_vommit.fg, bold = true })
 
 -- Cursor y selección
 hl("Cursor", { fg = neon_vommit.bg, bg = neon_vommit.fg })
-hl("CursorLine", { bg = "#3c3c3c80" })
-hl("CursorColumn", { bg = "#3c3c3c80" })
+hl("CursorLine", { bg = "#3c3c3c" }) -- Eliminado alpha
+hl("CursorColumn", { bg = "#3c3c3c" }) -- Eliminado alpha
 hl("ColorColumn", { bg = "#333333" })
 
 hl("Visual", { bg = "#646464" })
@@ -115,7 +115,7 @@ hl("VisualNOS", { bg = "#555555" })
 
 -- Líneas y números
 hl("LineNr", { fg = "#3a3a3a", bg = neon_vommit.bg })
-hl("CursorLineNr", { fg = neon_vommit.func, bg = "#3c3c3c80", bold = true })
+hl("CursorLineNr", { fg = neon_vommit.func, bg = "#3c3c3c", bold = true }) -- sin alpha
 hl("SignColumn", { bg = neon_vommit.bg })
 hl("Folded", { fg = neon_vommit.comment, bg = neon_vommit.bg })
 hl("FoldColumn", { fg = neon_vommit.comment, bg = neon_vommit.bg })

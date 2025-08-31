@@ -1,5 +1,8 @@
+-- lua/neon_vommit.lua
+
 local M = {}
 
+-- 🎨 Paleta final: sin grises, sin blanco, solo neón
 local neon_vommit = {
 	-- Fondo
 	bg = "#222222", -- Fondo principal
@@ -11,7 +14,7 @@ local neon_vommit = {
 	fg_comment = "#BB77FF", -- Morado neón para comentarios
 
 	-- Sintaxis
-	string = "#CBC3FF", -- Rosa neón
+	string = "#E3007B", -- Rosa neón
 	string_html = "#66D9EF", -- Cian HTML
 	number = "#33CC99", -- Verde número
 	constant = "#4499FF", -- Azul constante
@@ -19,9 +22,9 @@ local neon_vommit = {
 	func = "#76EE00", -- Verde lima
 	variable = "#66D9EF", -- Cian
 	type = "#CC33FF", -- Morado eléctrico
-	operator = "#FFFF00", -- Amarillo neón
-	yellow = "#FD971F", -- Naranja
-	purple = "#BB77FF", -- Morado
+	operator = "#FAF519", -- Amarillo neón
+	yellow = "#FFFF00", -- Naranja
+	purple = "#800080", -- Morado
 
 	-- Estado
 	error = "#f44747", -- Rojo error

@@ -22,8 +22,8 @@ local neon_vommit = {
 	func = "#76EE00", -- Verde lima
 	variable = "#66D9EF", -- Cian
 	type = "#CC33FF", -- Morado eléctrico
-	operator = "#FAF519", -- Amarillo neón
-	yellow = "#FFFF00", -- Naranja
+	operator = "#FFFF00", -- Amarillo neón
+	yellow = "#EF9C00", -- Naranja
 	purple = "#800080", -- Morado
 
 	-- Estado

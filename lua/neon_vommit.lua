@@ -1,39 +1,48 @@
--- lua/neon_vommit.lua
-
 local M = {}
 
 local neon_vommit = {
-	bg = "#222222",
-	fg = "#f0f0f0",
-	fg_dim = "#3a3a3a",
-	comment = "#BBAA99",
-	string = "#CBC3FF",
-	string_html = "#66D9EF",
-	number = "#33CC99",
-	constant = "#4499FF",
-	keyword = "#FF00AA",
-	func = "#76EE00",
-	variable = "#66D9EF",
-	type = "#CC33FF",
-	operator = "#FFFF00",
-	yellow = "#FD971F",
-	purple = "#BB77FF",
-	error = "#f44747",
-	warning = "#EEEE22",
-	info = "#6796e6",
-	debug = "#b267e6",
-	added = "#76EE00",
-	deleted = "#FF00AA",
-	selection = "#646464",
-	cursor_line = "#3c3c3c",
-	whitespace = "#4a4a4a",
-	cursor_fg = "#f0f0f0",
+	-- Fondo
+	bg = "#222222", -- Fondo principal
+	cursor_line = "#2d3149", -- Fondo de línea activa (más oscuro, no gris)
+
+	-- Texto principal y secundario
+	fg_main = "#00A49D", -- Tu color elegido: sustituye al blanco
+	fg_sub = "#66D9EF", -- Cian neón para secundario
+	fg_comment = "#BB77FF", -- Morado neón para comentarios
+
+	-- Sintaxis
+	string = "#CBC3FF", -- Rosa neón
+	string_html = "#66D9EF", -- Cian HTML
+	number = "#33CC99", -- Verde número
+	constant = "#4499FF", -- Azul constante
+	keyword = "#FF00AA", -- Rosa fuerte
+	func = "#76EE00", -- Verde lima
+	variable = "#66D9EF", -- Cian
+	type = "#CC33FF", -- Morado eléctrico
+	operator = "#FFFF00", -- Amarillo neón
+	yellow = "#FD971F", -- Naranja
+	purple = "#BB77FF", -- Morado
+
+	-- Estado
+	error = "#f44747", -- Rojo error
+	warning = "#EEEE22", -- Amarillo advertencia
+	info = "#6796e6", -- Azul info
+	debug = "#b267e6", -- Púrpura debug
+	added = "#76EE00", -- Verde agregado
+	deleted = "#FF00AA", -- Rosa eliminado
+
+	-- Editor
+	selection = "#3c3c3c", -- Selección oscura
+	whitespace = "#222222", -- Espacios en fondo
+	cursor_fg = "#66D9EF", -- Cursor en cian
 }
 
+-- Función auxiliar
 local function hl(group, style)
 	vim.api.nvim_set_hl(0, group, style)
 end
 
+-- Carga del tema
 function M.load()
 	vim.cmd("hi clear")
 	if vim.fn.exists("syntax_on") then
@@ -44,13 +53,13 @@ function M.load()
 	vim.g.colors_name = "neon_vommit"
 
 	-- Grupo principal
-	hl("Normal", { fg = neon_vommit.fg, bg = neon_vommit.bg })
+	hl("Normal", { fg = neon_vommit.fg_main, bg = neon_vommit.bg })
 	hl("NormalNC", { bg = neon_vommit.bg })
-	hl("NormalFloat", { bg = neon_vommit.bg, fg = neon_vommit.fg })
-	hl("FloatBorder", { fg = neon_vommit.comment, bg = neon_vommit.bg })
+	hl("NormalFloat", { bg = neon_vommit.bg, fg = neon_vommit.fg_main })
+	hl("FloatBorder", { fg = neon_vommit.fg_comment, bg = neon_vommit.bg })
 
 	-- Sintaxis
-	hl("Comment", { fg = neon_vommit.comment, italic = true })
+	hl("Comment", { fg = neon_vommit.fg_comment, italic = true })
 	hl("Constant", { fg = neon_vommit.constant })
 	hl("String", { fg = neon_vommit.string })
 	hl("Character", { fg = neon_vommit.string })
@@ -80,8 +89,8 @@ function M.load()
 	hl("Special", { fg = neon_vommit.yellow })
 	hl("SpecialChar", { fg = neon_vommit.error })
 	hl("Tag", { fg = neon_vommit.keyword })
-	hl("Delimiter", { fg = neon_vommit.fg })
-	hl("SpecialComment", { fg = neon_vommit.comment })
+	hl("Delimiter", { fg = neon_vommit.fg_sub })
+	hl("SpecialComment", { fg = neon_vommit.fg_comment })
 
 	hl("Todo", { fg = neon_vommit.bg, bg = neon_vommit.warning, bold = true })
 	hl("Error", { fg = neon_vommit.bg, bg = neon_vommit.error })
@@ -93,7 +102,7 @@ function M.load()
 	hl("DiffAdd", { bg = "#003300", fg = neon_vommit.added })
 	hl("DiffDelete", { bg = "#330000", fg = neon_vommit.deleted })
 	hl("DiffChange", { bg = "#333300", fg = neon_vommit.warning })
-	hl("DiffText", { bg = "#444400", fg = neon_vommit.fg, bold = true })
+	hl("DiffText", { bg = "#444400", fg = neon_vommit.fg_main, bold = true })
 
 	-- Cursor y selección
 	hl("Cursor", { fg = neon_vommit.bg, bg = neon_vommit.cursor_fg })
@@ -105,18 +114,18 @@ function M.load()
 	hl("VisualNOS", { bg = neon_vommit.selection })
 
 	-- Líneas
-	hl("LineNr", { fg = neon_vommit.fg_dim, bg = neon_vommit.bg })
+	hl("LineNr", { fg = neon_vommit.fg_sub, bg = neon_vommit.bg })
 	hl("CursorLineNr", { fg = neon_vommit.func, bg = neon_vommit.cursor_line, bold = true })
 	hl("SignColumn", { bg = neon_vommit.bg })
-	hl("Folded", { fg = neon_vommit.comment, bg = neon_vommit.bg })
-	hl("FoldColumn", { fg = neon_vommit.comment, bg = neon_vommit.bg })
+	hl("Folded", { fg = neon_vommit.fg_comment, bg = neon_vommit.bg })
+	hl("FoldColumn", { fg = neon_vommit.fg_comment, bg = neon_vommit.bg })
 
 	-- Estado
-	hl("StatusLine", { fg = neon_vommit.fg, bg = "#333333", bold = true })
-	hl("StatusLineNC", { fg = neon_vommit.comment, bg = "#333333" })
-	hl("WinBar", { fg = neon_vommit.fg, bg = neon_vommit.bg })
-	hl("WinBarNC", { fg = neon_vommit.comment, bg = neon_vommit.bg })
-	hl("VertSplit", { fg = neon_vommit.fg_dim, bg = neon_vommit.fg_dim })
+	hl("StatusLine", { fg = neon_vommit.fg_main, bg = "#333333", bold = true })
+	hl("StatusLineNC", { fg = neon_vommit.fg_comment, bg = "#333333" })
+	hl("WinBar", { fg = neon_vommit.fg_main, bg = neon_vommit.bg })
+	hl("WinBarNC", { fg = neon_vommit.fg_comment, bg = neon_vommit.bg })
+	hl("VertSplit", { fg = neon_vommit.fg_sub, bg = neon_vommit.fg_sub })
 
 	-- Búsqueda
 	hl("Search", { bg = neon_vommit.warning, fg = neon_vommit.bg })
@@ -146,8 +155,8 @@ function M.load()
 	hl("LspReferenceWrite", { bg = "#554455" })
 
 	-- Markdown
-	hl("markdownBold", { fg = neon_vommit.fg, bold = true })
-	hl("markdownItalic", { fg = neon_vommit.fg, bold = true })
+	hl("markdownBold", { fg = neon_vommit.fg_main, bold = true })
+	hl("markdownItalic", { fg = neon_vommit.fg_main, bold = true })
 	hl("markdownH1", { fg = neon_vommit.func, bold = true })
 	hl("markdownH2", { fg = neon_vommit.func, bold = true })
 	hl("markdownH3", { fg = neon_vommit.yellow, bold = true })
@@ -155,7 +164,7 @@ function M.load()
 	hl("markdownCode", { fg = neon_vommit.keyword })
 	hl("markdownListMarker", { fg = neon_vommit.purple })
 	hl("markdownHeadingRule", { fg = neon_vommit.operator })
-	hl("markdownUrl", { fg = neon_vommit.fg })
+	hl("markdownUrl", { fg = neon_vommit.fg_main })
 
 	-- HTML
 	hl("htmlTag", { fg = neon_vommit.keyword })
@@ -190,19 +199,19 @@ function M.load()
 	hl("typescriptKeyword", { fg = neon_vommit.keyword })
 
 	-- JSON
-	hl("jsonKeyword", { fg = neon_vommit.fg })
+	hl("jsonKeyword", { fg = neon_vommit.fg_main })
 	hl("jsonString", { fg = neon_vommit.string_html })
 	hl("jsonNumber", { fg = neon_vommit.func })
 	hl("jsonEscape", { fg = neon_vommit.operator })
 
 	-- Misc
 	hl("Underlined", { fg = neon_vommit.func, underline = true })
-	hl("Ignore", { fg = neon_vommit.comment })
+	hl("Ignore", { fg = neon_vommit.fg_comment })
 	hl("NonText", { fg = neon_vommit.whitespace })
 	hl("EndOfBuffer", { fg = neon_vommit.bg })
 
 	-- Treesitter
-	hl("TSComment", { fg = neon_vommit.comment, italic = true })
+	hl("TSComment", { fg = neon_vommit.fg_comment, italic = true })
 	hl("TSConstant", { fg = neon_vommit.constant })
 	hl("TSString", { fg = neon_vommit.string })
 	hl("TSNumber", { fg = neon_vommit.number })
